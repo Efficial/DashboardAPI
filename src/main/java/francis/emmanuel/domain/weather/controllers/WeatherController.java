@@ -1,0 +1,38 @@
+package francis.emmanuel.domain.weather.controllers;
+
+
+import francis.emmanuel.domain.weather.models.WeatherApiResponse;
+import francis.emmanuel.domain.weather.services.WeatherService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/classweather")
+
+public class WeatherController {
+    private static Logger logger = LoggerFactory.getLogger(WeatherController.class);
+    private WeatherService weatherService;
+
+    @Autowired
+    public WeatherController(WeatherService weatherService){
+        this.weatherService = weatherService;
+    }
+
+    @GetMapping("")
+    public ResponseEntity<WeatherApiResponse> requestWeather(@RequestParam(name="lon", required = false) String lon,
+                                                             @RequestParam(name="lat", required = false) String lat) {
+
+        Optional<WeatherApiResponse> response = weatherService.requestDataFromApi(lat, lon);
+        logger.info(response.toString());
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
+}

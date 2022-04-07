@@ -1,6 +1,8 @@
 package francis.emmanuel.domain.weather.services;
 
 import francis.emmanuel.domain.weather.models.WeatherApiResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import java.util.Optional;
 
 @Service
 public class WeatherServiceImpl implements WeatherService{
+    private Logger logger = LoggerFactory.getLogger(WeatherServiceImpl.class);
 
     private RestTemplate template;
 
@@ -30,6 +33,7 @@ public class WeatherServiceImpl implements WeatherService{
             WeatherApiResponse apiResponse = response.getBody();
             return Optional.of(apiResponse);
         } catch (HttpClientErrorException ex){
+            logger.error(ex.getMessage());
             return Optional.empty();
         }
     }
