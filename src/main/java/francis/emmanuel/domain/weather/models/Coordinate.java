@@ -19,4 +19,12 @@ public class Coordinate {
     public void setLon(Double lon) {
         this.lon = lon;
     }
+
+    @Override
+    public String toString() {
+        return "Coordinate{" +
+                "lat=" + lat +
+                ", lon=" + lon +
+                '}';
+    }
 }

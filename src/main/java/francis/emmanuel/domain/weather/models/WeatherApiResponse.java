@@ -127,4 +127,23 @@ public class WeatherApiResponse {
     public void setMain(WeatherMain main) {
         this.main = main;
     }
+
+    @Override
+    public String toString() {
+        return "WeatherApiResponse{" +
+                "weatherId=" + weatherId +
+                ", coord=" + coord +
+                ", weather=" + weather +
+                ", base='" + base + '\'' +
+                ", visibility=" + visibility +
+                ", wind=" + wind +
+                ", clouds=" + clouds +
+                ", dt=" + dt +
+                ", sys=" + sys +
+                ", timezone=" + timezone +
+                ", name='" + name + '\'' +
+                ", cod=" + cod +
+                ", main=" + main +
+                '}';
+    }
 }
